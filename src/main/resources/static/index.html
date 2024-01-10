@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Spring Boot WebSocket Chat Application</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+
+<div id="username-page">
+    <div class="username-page-container">
+        <h1 class="title-principal">JUEGA MICHI!!!</h1>
+        <div class="username-page-container-grid">
+        <form id="usernameForm1" name="usernameForm1">
+			<h2 class="title">Crear Sala</h2>
+            <div class="form-group">
+                <input type="text" id="namecreate" placeholder="Username" autocomplete="off" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Crear Sala</button>
+            </div>
+        </form>
+        <form id="usernameForm2" name="usernameForm2">
+			<h2 class="title">Unirse a Sala</h2>
+            <div class="form-group">
+				<input type="text" id="idsalajoin" placeholder="Idsala" value="" autocomplete="off" class="form-control" />
+                <input type="text" id="namejoin" placeholder="Username" autocomplete="off" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Unirse a Sala</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<div id="chat-page" class="hidden">
+    <div class="chat-container">
+		<div class="chat-header">
+            <h2 id="title" ></h2>
+            <div id="miModal">
+			</div>
+        </div>
+		<div id="miDiv" class="colorDiv">
+			<div class="michi-container">
+				<div class="michi-element" id="michi-1" style="background-image: '001z';" ></div>
+				<div class="michi-element" id="michi-2" style="background-image: '002z';"></div>
+				<div class="michi-element" id="michi-3" style="background-image: '003z';"></div>
+				<div class="michi-element" id="michi-4" style="background-image: '004z';"></div>
+				<div class="michi-element" id="michi-5" style="background-image: '005z';"></div>
+				<div class="michi-element" id="michi-6" style="background-image: '006z';"></div>
+				<div class="michi-element" id="michi-7" style="background-image: '007z';"></div>
+				<div class="michi-element" id="michi-8" style="background-image: '008z';"></div>
+				<div class="michi-element" id="michi-9" style="background-image: '009z';"></div>
+			</div>
+		</div>
+        <div class="connecting">
+            Connecting...
+        </div>
+        <ul id="messageArea">
+
+        </ul>
+        <form id="messageForm" name="messageForm">
+            <div class="form-group">
+                <div class="input-group clearfix">
+                    <input type="text" id="message" placeholder="Escribe tu mensaje..." autocomplete="off" class="form-control"/>
+                    <button type="submit" class="primary">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/sockjs.min.js"></script>
+<script src="/js/stomp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

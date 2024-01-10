@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns=th"https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Chat Tiempo Real</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-body">
+				<div id="messageArea"></div>	
+				<div class="mb-3">
+					<label for="username" class="form-label">Nombre de usuario</label>
+					<input type="text" class="form-control" id="username" placeholder="Introduzca su nombre">
+				</div>
+				<div class="mb-3">
+					<label for="messageInput" class="form-label">Mensaje:</label>
+					<input type="text" class="form-control" id="messageInput" placeholder="Introduzca tu Mensaje">
+				</div>	
+					<button onclick="sendMessage()" class="btn btn-primary - mt-3">Enviar</button>
+			
+			</div>
+		</div>
+	</div>
+<script th:inline="javascript">
+	let socket = new WebSocket("ws://localhost:8050/chat");
+	
+	socket.onmessage = function(event){
+		let messageArea = document.getElementById("messageArea");
+		console.log(event.data);
+		
+		const parts = event.data.split(",");
+		
+		const usuario = parts[0];
+        const mensaje = parts[1];
+		
+		if (messageArea) {
+            messageArea.innerHTML += "<h1>" + usuario + '</h1>';
+            messageArea.innerHTML += "<p>" + mensaje + '</p>';
+        }
+        
+	}
+	function sendMessage(){
+		let username = document.getElementById("username");
+		let messageInput = document.getElementById("messageInput");
+		
+		let fullMessage = username.value + ": " + messageInput.value;
+		
+		socket.send(fullMessage);
+		messageInput.value = ''; 
+	}
+	
+</script>
+</body>
+</html>
